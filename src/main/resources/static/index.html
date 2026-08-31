@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Master - Interactive Java Chess Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="theme-classic">
+
+    <!-- Top Navigation Bar -->
+    <header class="app-header">
+        <div class="header-container">
+            <div class="logo-group" id="btnNavLogo">
+                <span class="logo-icon">♟</span>
+                <div class="logo-text">
+                    <span class="logo-title">CHESS MASTER</span>
+                    <span class="logo-sub">JAVA ENGINE & REST API</span>
+                </div>
+            </div>
+            <nav class="nav-links">
+                <button class="nav-btn" id="btnNavHome">🏠 Home</button>
+                <button class="nav-btn" id="btnNavHowToPlay">📖 How to Play</button>
+                <button class="nav-btn" id="btnNavHistory">📜 Game History</button>
+                <button class="nav-btn" id="btnNavSettings">⚙️ Settings</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="main-content">
+
+        <!-- ============================================== -->
+        <!-- SCREEN 1: HOME PAGE                            -->
+        <!-- ============================================== -->
+        <section id="viewHome" class="view-section active">
+            <div class="home-hero">
+                <div class="hero-badge">🏆 ULTIMATE JAVA CHESS EXPERIENCE</div>
+                <h1 class="hero-title">♟ CHESS MASTER</h1>
+                <p class="hero-subtitle">"Play Chess. Think Smart. Win the Game."</p>
+
+                <div class="hero-modes-grid">
+                    <!-- Play with Friend Card -->
+                    <div class="mode-card" id="btnCardFriend">
+                        <div class="mode-card-icon">👥</div>
+                        <h3 class="mode-card-title">PLAY WITH FRIEND</h3>
+                        <p class="mode-card-desc">Challenge a friend on the same device. Custom player names, turn management, and chess clocks.</p>
+                        <button class="btn btn-primary mode-card-btn">Play with Friend →</button>
+                    </div>
+
+                    <!-- Play with Computer Card -->
+                    <div class="mode-card" id="btnCardComputer">
+                        <div class="mode-card-icon">🤖</div>
+                        <h3 class="mode-card-title">PLAY WITH COMPUTER</h3>
+                        <p class="mode-card-desc">Battle intelligent Java AI with Easy, Medium, and Minimax Alpha-Beta Pruning Hard modes.</p>
+                        <button class="btn btn-gold mode-card-btn">Play with Computer →</button>
+                    </div>
+                </div>
+
+                <!-- Secondary Quick Nav -->
+                <div class="home-secondary-actions">
+                    <button class="btn btn-outline" id="btnHomeHowToPlay">📖 HOW TO PLAY</button>
+                    <button class="btn btn-outline" id="btnHomeHistory">📜 GAME HISTORY</button>
+                    <button class="btn btn-outline" id="btnHomeSettings">⚙️ SETTINGS</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- SCREEN 2: PLAY WITH FRIEND SETUP               -->
+        <!-- ============================================== -->
+        <section id="viewFriendSetup" class="view-section">
+            <div class="setup-container">
+                <div class="setup-card">
+                    <h2 class="setup-title">👥 Play with Friend</h2>
+                    <p class="setup-subtitle">Set up player details to start your local match</p>
+
+                    <div class="form-group">
+                        <label for="inputFriendP1">Player 1 Name:</label>
+                        <input type="text" id="inputFriendP1" class="form-input" placeholder="e.g. Sayali" value="Sayali">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputFriendP2">Player 2 Name:</label>
+                        <input type="text" id="inputFriendP2" class="form-input" placeholder="e.g. Rahul" value="Rahul">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Choose who plays White:</label>
+                        <div class="toggle-group" id="friendWhiteSelector">
+                            <button type="button" class="toggle-option active" data-value="P1">Player 1 (White)</button>
+                            <button type="button" class="toggle-option" data-value="P2">Player 2 (White)</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Clock Time Control:</label>
+                        <div class="toggle-group" id="friendTimeControl">
+                            <button type="button" class="toggle-option" data-minutes="1">1 min</button>
+                            <button type="button" class="toggle-option" data-minutes="3">3 min</button>
+                            <button type="button" class="toggle-option" data-minutes="5">5 min</button>
+                            <button type="button" class="toggle-option active" data-minutes="10">10 min</button>
+                            <button type="button" class="toggle-option" data-minutes="15">15 min</button>
+                        </div>
+                    </div>
+
+                    <div class="setup-actions">
+                        <button class="btn btn-outline" id="btnBackFromFriend">← Back</button>
+                        <button class="btn btn-primary" id="btnStartFriendGame">START GAME ♟</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- SCREEN 3: PLAY WITH COMPUTER SETUP             -->
+        <!-- ============================================== -->
+        <section id="viewComputerSetup" class="view-section">
+            <div class="setup-container">
+                <div class="setup-card">
+                    <h2 class="setup-title">🤖 Play with Computer</h2>
+                    <p class="setup-subtitle">Select your side and AI intelligence level</p>
+
+                    <div class="form-group">
+                        <label for="inputComputerPlayerName">Your Name:</label>
+                        <input type="text" id="inputComputerPlayerName" class="form-input" placeholder="Your Name" value="Player">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Choose Your Color:</label>
+                        <div class="toggle-group" id="computerColorSelector">
+                            <button type="button" class="toggle-option active" data-value="WHITE">♔ WHITE</button>
+                            <button type="button" class="toggle-option" data-value="BLACK">♚ BLACK</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Choose Difficulty:</label>
+                        <div class="difficulty-cards-group" id="computerDifficultySelector">
+                            <div class="diff-card" data-value="EASY">
+                                <div class="diff-card-header">🟢 EASY</div>
+                                <div class="diff-card-body">Simple legal moves, casual & forgiving play</div>
+                            </div>
+                            <div class="diff-card active" data-value="MEDIUM">
+                                <div class="diff-card-header">🟡 MEDIUM</div>
+                                <div class="diff-card-body">Positional evaluation, tactical captures, 2-ply Minimax</div>
+                            </div>
+                            <div class="diff-card" data-value="HARD">
+                                <div class="diff-card-header">🔴 HARD</div>
+                                <div class="diff-card-body">Minimax + Alpha-Beta Pruning, piece-square tables, king safety</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Clock Time Control:</label>
+                        <div class="toggle-group" id="computerTimeControl">
+                            <button type="button" class="toggle-option" data-minutes="1">1 min</button>
+                            <button type="button" class="toggle-option" data-minutes="3">3 min</button>
+                            <button type="button" class="toggle-option" data-minutes="5">5 min</button>
+                            <button type="button" class="toggle-option active" data-minutes="10">10 min</button>
+                            <button type="button" class="toggle-option" data-minutes="15">15 min</button>
+                        </div>
+                    </div>
+
+                    <div class="setup-actions">
+                        <button class="btn btn-outline" id="btnBackFromComputer">← Back</button>
+                        <button class="btn btn-gold" id="btnStartComputerGame">START GAME ♟</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- SCREEN 4: CHESS GAME ARENA                     -->
+        <!-- ============================================== -->
+        <section id="viewGame" class="view-section">
+            <div class="game-arena-layout">
+
+                <!-- Left / Board Area -->
+                <div class="board-column">
+
+                    <!-- Top Player Bar (Black by default or opponent) -->
+                    <div class="player-bar top-player" id="topPlayerBar">
+                        <div class="player-info">
+                            <div class="player-avatar" id="topPlayerAvatar">♚</div>
+                            <div class="player-details">
+                                <div class="player-name-row">
+                                    <span class="player-name" id="topPlayerName">Black</span>
+                                    <span class="player-badge" id="topPlayerBadge">BLACK</span>
+                                </div>
+                                <div class="captured-tray" id="topCapturedTray"></div>
+                            </div>
+                        </div>
+                        <div class="player-clock" id="topClock">10:00</div>
+                    </div>
+
+                    <!-- 8x8 Chess Board Container -->
+                    <div class="chessboard-wrapper">
+                        <!-- Left Coordinate Ranks (8 to 1) -->
+                        <div class="board-ranks" id="boardRanks">
+                            <span>8</span><span>7</span><span>6</span><span>5</span>
+                            <span>4</span><span>3</span><span>2</span><span>1</span>
+                        </div>
+
+                        <div class="chessboard-inner">
+                            <div id="chessboard" class="chessboard">
+                                <!-- 64 Squares generated dynamically by JS -->
+                            </div>
+
+                            <!-- Bottom Coordinate Files (a to h) -->
+                            <div class="board-files" id="boardFiles">
+                                <span>a</span><span>b</span><span>c</span><span>d</span>
+                                <span>e</span><span>f</span><span>g</span><span>h</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Player Bar (White by default or user) -->
+                    <div class="player-bar bottom-player" id="bottomPlayerBar">
+                        <div class="player-info">
+                            <div class="player-avatar" id="bottomPlayerAvatar">♔</div>
+                            <div class="player-details">
+                                <div class="player-name-row">
+                                    <span class="player-name" id="bottomPlayerName">White</span>
+                                    <span class="player-badge" id="bottomPlayerBadge">WHITE</span>
+                                </div>
+                                <div class="captured-tray" id="bottomCapturedTray"></div>
+                            </div>
+                        </div>
+                        <div class="player-clock" id="bottomClock">10:00</div>
+                    </div>
+
+                </div>
+
+                <!-- Right / Sidebar Area -->
+                <div class="sidebar-column">
+
+                    <!-- Game Status Banner -->
+                    <div class="status-card" id="statusCard">
+                        <div class="status-indicator">
+                            <span class="status-dot"></span>
+                            <span class="status-text" id="statusText">White's Turn</span>
+                        </div>
+                        <div class="status-sub" id="statusSub">Make your move</div>
+                        <div class="ai-thinking-badge hidden" id="aiThinkingBadge">
+                            <span class="spinner"></span> 🤖 Computer is thinking...
+                        </div>
+                    </div>
+
+                    <!-- Game Control Buttons -->
+                    <div class="game-controls-grid">
+                        <button class="btn btn-control" id="btnUndoMove" title="Undo previous move">↩ UNDO</button>
+                        <button class="btn btn-control" id="btnRestartGame" title="Restart current game">🔄 RESTART</button>
+                        <button class="btn btn-control" id="btnMainMenu" title="Return to Home">🏠 MAIN MENU</button>
+                    </div>
+
+                    <!-- Move History Panel -->
+                    <div class="history-panel">
+                        <div class="history-header">
+                            <span class="history-title">MOVE HISTORY</span>
+                            <span class="history-count" id="historyMoveCount">0 moves</span>
+                        </div>
+                        <div class="history-table-container">
+                            <table class="history-table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>White</th>
+                                        <th>Black</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="moveHistoryBody">
+                                    <!-- Populated dynamically e.g. <tr><td>1</td><td>e4</td><td>e5</td></tr> -->
+                                </tbody>
+                            </table>
+                            <div class="empty-history-placeholder" id="emptyHistoryMsg">No moves yet. Start playing!</div>
+                        </div>
+                    </div>
+
+                    <!-- Material Evaluation Bar -->
+                    <div class="material-bar-container">
+                        <div class="material-title">Material Balance:</div>
+                        <div class="material-score" id="materialScore">Equal</div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ============================================== -->
+    <!-- MODAL 1: PAWN PROMOTION DIALOG                 -->
+    <!-- ============================================== -->
+    <div class="modal-overlay hidden" id="modalPromotion">
+        <div class="modal-card promotion-modal">
+            <h3 class="modal-title">Choose Promotion</h3>
+            <p class="modal-subtitle">Select a piece to promote your Pawn:</p>
+            <div class="promotion-choices-grid">
+                <button class="promo-choice-btn" data-piece="QUEEN">
+                    <span class="promo-icon">♕</span>
+                    <span class="promo-name">Queen</span>
+                </button>
+                <button class="promo-choice-btn" data-piece="ROOK">
+                    <span class="promo-icon">♖</span>
+                    <span class="promo-name">Rook</span>
+                </button>
+                <button class="promo-choice-btn" data-piece="BISHOP">
+                    <span class="promo-icon">♗</span>
+                    <span class="promo-name">Bishop</span>
+                </button>
+                <button class="promo-choice-btn" data-piece="KNIGHT">
+                    <span class="promo-icon">♘</span>
+                    <span class="promo-name">Knight</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- MODAL 2: GAME OVER / CHECKMATE / DRAW          -->
+    <!-- ============================================== -->
+    <div class="modal-overlay hidden" id="modalGameOver">
+        <div class="modal-card game-over-modal">
+            <div class="game-over-trophy" id="gameOverIcon">🏆</div>
+            <h2 class="game-over-headline" id="gameOverHeadline">CHECKMATE!</h2>
+            <p class="game-over-winner" id="gameOverWinner">WHITE WINS</p>
+            <p class="game-over-reason" id="gameOverReason">By Checkmate</p>
+            <div class="modal-actions">
+                <button class="btn btn-primary" id="btnGameOverPlayAgain">PLAY AGAIN</button>
+                <button class="btn btn-outline" id="btnGameOverMainMenu">MAIN MENU</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- MODAL 3: HOW TO PLAY                           -->
+    <!-- ============================================== -->
+    <div class="modal-overlay hidden" id="modalHowToPlay">
+        <div class="modal-card help-modal">
+            <div class="modal-header-row">
+                <h3 class="modal-title">📖 How to Play Chess Master</h3>
+                <button class="modal-close-btn" id="btnCloseHowToPlay">&times;</button>
+            </div>
+            <div class="help-modal-body">
+                <div class="help-section">
+                    <h4>🟢 Legal Move Highlighting</h4>
+                    <p>Click on any of your chess pieces. The application immediately calculates all legal moves according to official chess rules and highlights the valid target squares in <strong>GREEN</strong>.</p>
+                    <ul>
+                        <li><span class="color-dot green-dot"></span> <strong>Green Circle</strong>: Legal destination square.</li>
+                        <li><span class="color-ring green-ring"></span> <strong>Green Ring</strong>: Legal piece capture.</li>
+                    </ul>
+                </div>
+
+                <div class="help-section">
+                    <h4>♟ Piece Movements</h4>
+                    <div class="pieces-guide-grid">
+                        <div class="piece-guide-item">
+                            <span class="pg-icon">♙</span>
+                            <strong>Pawn</strong>: Moves 1 square forward (or 2 on its first move). Captures diagonally 1 square forward. Supports <em>En Passant</em> and <em>Pawn Promotion</em>.
+                        </div>
+                        <div class="piece-guide-item">
+                            <span class="pg-icon">♘</span>
+                            <strong>Knight</strong>: Moves in an "L-shape" (2 squares in one direction, 1 square perpendicular). Can jump over other pieces.
+                        </div>
+                        <div class="piece-guide-item">
+                            <span class="pg-icon">♗</span>
+                            <strong>Bishop</strong>: Moves any number of vacant squares diagonally.
+                        </div>
+                        <div class="piece-guide-item">
+                            <span class="pg-icon">♖</span>
+                            <strong>Rook</strong>: Moves any number of vacant squares horizontally or vertically.
+                        </div>
+                        <div class="piece-guide-item">
+                            <span class="pg-icon">♕</span>
+                            <strong>Queen</strong>: Combines the power of Rook and Bishop in all 8 directions.
+                        </div>
+                        <div class="piece-guide-item">
+                            <span class="pg-icon">♔</span>
+                            <strong>King</strong>: Moves 1 square in any direction. Can perform <em>Castling</em> with a Rook.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="help-section">
+                    <h4>⚡ Special Rules Supported</h4>
+                    <ul>
+                        <li><strong>Castling</strong>: Move King 2 squares towards Rook if neither has moved and intervening squares are safe and empty.</li>
+                        <li><strong>En Passant</strong>: Capture an enemy pawn that just moved 2 squares forward adjacent to yours.</li>
+                        <li><strong>Pawn Promotion</strong>: Reach the 8th/1st rank to promote to Queen, Rook, Bishop, or Knight.</li>
+                        <li><strong>Check & Checkmate</strong>: A king under attack is highlighted in Red. If no legal move can escape check, it is Checkmate!</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="btnHelpGotIt">Got It!</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- MODAL 4: GAME HISTORY                          -->
+    <!-- ============================================== -->
+    <div class="modal-overlay hidden" id="modalHistory">
+        <div class="modal-card history-modal">
+            <div class="modal-header-row">
+                <h3 class="modal-title">📜 Game History</h3>
+                <button class="modal-close-btn" id="btnCloseHistory">&times;</button>
+            </div>
+            <div class="history-modal-body">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>White</th>
+                            <th>Black</th>
+                            <th>Mode</th>
+                            <th>Winner</th>
+                            <th>Moves</th>
+                            <th>Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyTableBody">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+                <div class="empty-history-placeholder" id="noGamesRecordedMsg">No saved games yet.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- MODAL 5: SETTINGS                              -->
+    <!-- ============================================== -->
+    <div class="modal-overlay hidden" id="modalSettings">
+        <div class="modal-card settings-modal">
+            <div class="modal-header-row">
+                <h3 class="modal-title">⚙️ Game Settings</h3>
+                <button class="modal-close-btn" id="btnCloseSettings">&times;</button>
+            </div>
+            <div class="settings-modal-body">
+                <div class="setting-item">
+                    <label>Board Theme:</label>
+                    <select id="selectBoardTheme" class="form-select">
+                        <option value="theme-classic">🪵 Classic Wood</option>
+                        <option value="theme-emerald">🌲 Dark Emerald</option>
+                        <option value="theme-ocean">🌊 Ocean Blue</option>
+                        <option value="theme-tournament">♟ Tournament Charcoal</option>
+                        <option value="theme-glass">🔮 Cyber Glass</option>
+                    </select>
+                </div>
+
+                <div class="setting-item">
+                    <label>Sound Effects:</label>
+                    <label class="switch">
+                        <input type="checkbox" id="checkSoundEnabled" checked>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+
+                <div class="setting-item">
+                    <label>Smooth Animations:</label>
+                    <label class="switch">
+                        <input type="checkbox" id="checkAnimationsEnabled" checked>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="btnSaveSettings">Save & Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification for In-Game Alerts -->
+    <div id="toastAlert" class="toast-alert hidden"></div>
+
+    <!-- JavaScript Files -->
+    <script src="js/api.js"></script>
+    <script src="js/sound.js"></script>
+    <script src="js/chessboard.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
