@@ -1,22 +1,10 @@
-# Maven
+@"
 target/
-
-# VS Code
-.vscode/
-
-# IntelliJ IDEA
 .idea/
 *.iml
-
-# Java compiled files
-*.class
-
-# Environment files
-.env
-
-# Logs
+.classpath
+.project
+.settings/
+.vscode/
 *.log
-
-# OS files
-.DS_Store
-Thumbs.db
+"@ | Out-File -Encoding utf8 .gitignore
