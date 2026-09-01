@@ -1,11 +1,18 @@
-FROM eclipse-temurin:21-jdk
+FROM maven:3.9.11-eclipse-temurin-21 AS build
 
 WORKDIR /app
 
-COPY . .
+COPY pom.xml .
+COPY src ./src
 
 RUN mvn clean package -DskipTests
 
+FROM eclipse-temurin:21-jre
+
+WORKDIR /app
+
+COPY --from=build /app/target/chess-master-1.0.0.jar app.jar
+
 EXPOSE 10000
 
-CMD ["java", "-jar", "target/chess-master-1.0.0.jar", "--server.port=10000", "--server.address=0.0.0.0"]
+ENTRYPOINT ["java", "-jar", "app.jar", "--server.port=10000", "--server.address=0.0.0.0"]
