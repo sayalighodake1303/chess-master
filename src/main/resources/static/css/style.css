@@ -27,6 +27,8 @@
     --square-last-move: rgba(186, 202, 68, 0.5);
     --square-check: radial-gradient(circle, rgba(239,68,68,0.85) 0%, rgba(239,68,68,0.2) 70%, transparent 100%);
     --legal-move-color: #22c55e;
+    --board-size: min(72vmin, 600px);
+    --board-label-size: 20px;
 
     --font-heading: 'Cinzel', serif;
     --font-body: 'Outfit', sans-serif;
@@ -533,10 +535,11 @@ body {
    =================================================================== */
 .game-arena-layout {
     display: grid;
-    grid-template-columns: minmax(360px, 640px) 380px;
+    grid-template-columns: minmax(0, 600px) 380px;
     gap: 32px;
     justify-content: center;
     align-items: start;
+    width: 100%;
 }
 
 .board-column {
@@ -544,6 +547,8 @@ body {
     flex-direction: column;
     gap: 12px;
     width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 /* Player Bar */
@@ -556,7 +561,10 @@ body {
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-    transition: var(--transition);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 64px;
 }
 
 .player-bar.active-turn {
@@ -568,6 +576,8 @@ body {
     display: flex;
     align-items: center;
     gap: 12px;
+    min-width: 0;
+    flex: 1;
 }
 
 .player-avatar {
@@ -580,6 +590,15 @@ body {
     align-items: center;
     justify-content: center;
     border: 1px solid var(--bg-card-border);
+    flex-shrink: 0;
+}
+
+.player-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+    flex: 1;
 }
 
 .player-name-row {
@@ -591,6 +610,9 @@ body {
 .player-name {
     font-weight: 700;
     font-size: 1.05rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .player-badge {
@@ -600,13 +622,17 @@ body {
     border-radius: 4px;
     background: rgba(255, 255, 255, 0.1);
     color: var(--text-secondary);
+    flex-shrink: 0;
 }
 
 .captured-tray {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     gap: 2px;
-    min-height: 18px;
+    min-height: 20px;
+    max-height: 40px;
+    overflow-y: auto;
     font-size: 1rem;
     color: var(--text-muted);
 }
@@ -620,6 +646,7 @@ body {
     border-radius: 6px;
     border: 1px solid #333;
     color: #e2e8f0;
+    flex-shrink: 0;
 }
 
 .player-bar.active-turn .player-clock {
@@ -643,53 +670,85 @@ body {
    CHESS BOARD & GREEN HIGHLIGHTS
    =================================================================== */
 .chessboard-wrapper {
-    display: flex;
-    align-items: center;
+    display: grid;
+    grid-template-columns: var(--board-label-size) minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr) var(--board-label-size);
+    gap: 6px 8px;
+    width: 100%;
+    max-width: var(--board-size);
+    margin: 0 auto;
     background: #0b0c10;
     padding: 14px;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-main);
     border: 2px solid rgba(255, 255, 255, 0.05);
+    box-sizing: border-box;
+    align-items: stretch;
 }
 
 .board-ranks {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    height: 100%;
-    padding-right: 8px;
+    grid-column: 1;
+    grid-row: 1;
+    display: grid;
+    grid-template-rows: repeat(8, 1fr);
+    align-items: center;
+    justify-items: center;
     font-size: 0.8rem;
     font-weight: 700;
     color: var(--text-muted);
     user-select: none;
+    line-height: 1;
+    width: var(--board-label-size);
+    height: 100%;
 }
 
-.chessboard-inner {
-    flex: 1;
+.board-ranks span {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
 }
 
 .chessboard {
+    grid-column: 2;
+    grid-row: 1;
     display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(8, 1fr);
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    grid-template-rows: repeat(8, minmax(0, 1fr));
     width: 100%;
     aspect-ratio: 1 / 1;
     border-radius: 6px;
     overflow: hidden;
     user-select: none;
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.6);
+    box-sizing: border-box;
+    position: relative;
+    contain: paint layout size;
 }
 
 .board-files {
-    display: flex;
-    justify-content: space-around;
-    padding-top: 8px;
+    grid-column: 2;
+    grid-row: 2;
+    display: grid;
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    align-items: center;
+    justify-items: center;
     font-size: 0.8rem;
     font-weight: 700;
     color: var(--text-muted);
     user-select: none;
+    line-height: 1;
+    width: 100%;
+    height: var(--board-label-size);
+}
+
+.board-files span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
 }
 
 /* Squares */
@@ -698,8 +757,17 @@ body {
     align-items: center;
     justify-content: center;
     position: relative;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    min-width: 0;
+    min-height: 0;
+    box-sizing: border-box;
     cursor: pointer;
-    transition: background 0.15s ease;
+    transition: background-color 0.15s ease;
+    overflow: hidden;
+    contain: strict;
+    user-select: none;
 }
 
 .square.light {
@@ -712,14 +780,17 @@ body {
 
 .square.selected-square {
     background-color: var(--square-selected) !important;
+    box-shadow: inset 0 0 0 4px rgba(255, 255, 255, 0.4), inset 0 0 0 9999px rgba(246, 224, 94, 0.2);
 }
 
 .square.last-move {
     background-color: var(--square-last-move) !important;
+    box-shadow: inset 0 0 0 9999px rgba(186, 202, 68, 0.18);
 }
 
 .square.king-check {
     background: var(--square-check) !important;
+    box-shadow: inset 0 0 0 9999px rgba(239, 68, 68, 0.1);
     animation: pulseCheck 1.2s infinite alternate;
 }
 
@@ -739,10 +810,14 @@ body {
     height: 32%;
     border-radius: 50%;
     background-color: rgba(34, 197, 94, 0.85);
-    box-shadow: 0 0 12px rgba(34, 197, 94, 0.9), inset 0 0 4px #fff;
+    box-shadow: 0 0 10px rgba(34, 197, 94, 0.9), inset 0 0 4px #fff;
     pointer-events: none;
     z-index: 5;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     animation: popIn 0.2s ease-out;
+    box-sizing: border-box;
 }
 
 /* Capture Square Legal Move: Green Outer Ring / Halo */
@@ -751,34 +826,45 @@ body {
     width: 86%;
     height: 86%;
     border-radius: 50%;
-    border: 5px solid rgba(34, 197, 94, 0.9);
-    box-shadow: 0 0 14px rgba(34, 197, 94, 0.85);
+    border: 4px solid rgba(34, 197, 94, 0.9);
+    box-shadow: 0 0 12px rgba(34, 197, 94, 0.85);
     background: rgba(34, 197, 94, 0.2);
     pointer-events: none;
     z-index: 5;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
     animation: popIn 0.2s ease-out;
 }
 
 @keyframes popIn {
-    0% { transform: scale(0.3); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
+    0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
+    100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
 }
 
 /* Chess Pieces */
 .chess-piece {
-    width: 90%;
-    height: 90%;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: clamp(2rem, 5vw, 3.4rem);
+    font-size: clamp(1.8rem, 5vw, 3.2rem);
+    line-height: 1;
     cursor: grab;
-    transition: transform 0.15s ease;
+    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 2;
-    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.45));
+    box-sizing: border-box;
+    filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.45));
+    user-select: none;
+    pointer-events: none;
+    transform-origin: center center;
 }
 
-.chess-piece:hover {
+.square:hover .chess-piece {
     transform: scale(1.08);
 }
 
@@ -1272,6 +1358,10 @@ input:checked + .slider:before {
 }
 
 @media (max-width: 640px) {
+    :root {
+        --board-label-size: 16px;
+    }
+
     .hero-title {
         font-size: 2.4rem;
     }
@@ -1290,6 +1380,7 @@ input:checked + .slider:before {
 
     .chessboard-wrapper {
         padding: 8px;
+        gap: 4px 6px;
     }
 
     .player-clock {
