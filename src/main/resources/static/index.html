@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="_s6-0zmbKhriEPZe8cME9BT-LjPuHEU4jT6WYExBwkA" />
     <title>Chess Master - Interactive Java Chess Game</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Outfit:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body class="theme-classic">
 
     <!-- Top Navigation Bar -->
@@ -47,7 +52,8 @@
                     <div class="mode-card" id="btnCardFriend">
                         <div class="mode-card-icon">👥</div>
                         <h3 class="mode-card-title">PLAY WITH FRIEND</h3>
-                        <p class="mode-card-desc">Challenge a friend on the same device. Custom player names, turn management, and chess clocks.</p>
+                        <p class="mode-card-desc">Challenge a friend on the same device. Custom player names, turn
+                            management, and chess clocks.</p>
                         <button class="btn btn-primary mode-card-btn">Play with Friend →</button>
                     </div>
 
@@ -55,7 +61,8 @@
                     <div class="mode-card" id="btnCardComputer">
                         <div class="mode-card-icon">🤖</div>
                         <h3 class="mode-card-title">PLAY WITH COMPUTER</h3>
-                        <p class="mode-card-desc">Battle intelligent Java AI with Easy, Medium, and Minimax Alpha-Beta Pruning Hard modes.</p>
+                        <p class="mode-card-desc">Battle intelligent Java AI with Easy, Medium, and Minimax Alpha-Beta
+                            Pruning Hard modes.</p>
                         <button class="btn btn-gold mode-card-btn">Play with Computer →</button>
                     </div>
                 </div>
@@ -80,7 +87,8 @@
 
                     <div class="form-group">
                         <label for="inputFriendP1">Player 1 Name:</label>
-                        <input type="text" id="inputFriendP1" class="form-input" placeholder="e.g. Sayali" value="Sayali">
+                        <input type="text" id="inputFriendP1" class="form-input" placeholder="e.g. Sayali"
+                            value="Sayali">
                     </div>
 
                     <div class="form-group">
@@ -126,7 +134,8 @@
 
                     <div class="form-group">
                         <label for="inputComputerPlayerName">Your Name:</label>
-                        <input type="text" id="inputComputerPlayerName" class="form-input" placeholder="Your Name" value="Player">
+                        <input type="text" id="inputComputerPlayerName" class="form-input" placeholder="Your Name"
+                            value="Player">
                     </div>
 
                     <div class="form-group">
@@ -146,11 +155,13 @@
                             </div>
                             <div class="diff-card active" data-value="MEDIUM">
                                 <div class="diff-card-header">🟡 MEDIUM</div>
-                                <div class="diff-card-body">Positional evaluation, tactical captures, 2-ply Minimax</div>
+                                <div class="diff-card-body">Positional evaluation, tactical captures, 2-ply Minimax
+                                </div>
                             </div>
                             <div class="diff-card" data-value="HARD">
                                 <div class="diff-card-header">🔴 HARD</div>
-                                <div class="diff-card-body">Minimax + Alpha-Beta Pruning, piece-square tables, king safety</div>
+                                <div class="diff-card-body">Minimax + Alpha-Beta Pruning, piece-square tables, king
+                                    safety</div>
                             </div>
                         </div>
                     </div>
@@ -251,7 +262,8 @@
                     <!-- Game Control Buttons -->
                     <div class="game-controls-grid">
                         <button class="btn btn-control" id="btnUndoMove" title="Undo previous move">↩ UNDO</button>
-                        <button class="btn btn-control" id="btnRestartGame" title="Restart current game">🔄 RESTART</button>
+                        <button class="btn btn-control" id="btnRestartGame" title="Restart current game">🔄
+                            RESTART</button>
                         <button class="btn btn-control" id="btnMainMenu" title="Return to Home">🏠 MAIN MENU</button>
                     </div>
 
@@ -274,7 +286,8 @@
                                     <!-- Populated dynamically e.g. <tr><td>1</td><td>e4</td><td>e5</td></tr> -->
                                 </tbody>
                             </table>
-                            <div class="empty-history-placeholder" id="emptyHistoryMsg">No moves yet. Start playing!</div>
+                            <div class="empty-history-placeholder" id="emptyHistoryMsg">No moves yet. Start playing!
+                            </div>
                         </div>
                     </div>
 
@@ -347,10 +360,15 @@
             <div class="help-modal-body">
                 <div class="help-section">
                     <h4>🟢 Legal Move Highlighting</h4>
-                    <p>Click on any of your chess pieces. The application immediately calculates all legal moves according to official chess rules and highlights the valid target squares in <strong>GREEN</strong>.</p>
+                    <p>Click on any of your chess pieces. The application immediately calculates all legal moves
+                        according to official chess rules and highlights the valid target squares in
+                        <strong>GREEN</strong>.
+                    </p>
                     <ul>
-                        <li><span class="color-dot green-dot"></span> <strong>Green Circle</strong>: Legal destination square.</li>
-                        <li><span class="color-ring green-ring"></span> <strong>Green Ring</strong>: Legal piece capture.</li>
+                        <li><span class="color-dot green-dot"></span> <strong>Green Circle</strong>: Legal destination
+                            square.</li>
+                        <li><span class="color-ring green-ring"></span> <strong>Green Ring</strong>: Legal piece
+                            capture.</li>
                     </ul>
                 </div>
 
@@ -359,11 +377,13 @@
                     <div class="pieces-guide-grid">
                         <div class="piece-guide-item">
                             <span class="pg-icon">♙</span>
-                            <strong>Pawn</strong>: Moves 1 square forward (or 2 on its first move). Captures diagonally 1 square forward. Supports <em>En Passant</em> and <em>Pawn Promotion</em>.
+                            <strong>Pawn</strong>: Moves 1 square forward (or 2 on its first move). Captures diagonally
+                            1 square forward. Supports <em>En Passant</em> and <em>Pawn Promotion</em>.
                         </div>
                         <div class="piece-guide-item">
                             <span class="pg-icon">♘</span>
-                            <strong>Knight</strong>: Moves in an "L-shape" (2 squares in one direction, 1 square perpendicular). Can jump over other pieces.
+                            <strong>Knight</strong>: Moves in an "L-shape" (2 squares in one direction, 1 square
+                            perpendicular). Can jump over other pieces.
                         </div>
                         <div class="piece-guide-item">
                             <span class="pg-icon">♗</span>
@@ -379,7 +399,8 @@
                         </div>
                         <div class="piece-guide-item">
                             <span class="pg-icon">♔</span>
-                            <strong>King</strong>: Moves 1 square in any direction. Can perform <em>Castling</em> with a Rook.
+                            <strong>King</strong>: Moves 1 square in any direction. Can perform <em>Castling</em> with a
+                            Rook.
                         </div>
                     </div>
                 </div>
@@ -387,10 +408,14 @@
                 <div class="help-section">
                     <h4>⚡ Special Rules Supported</h4>
                     <ul>
-                        <li><strong>Castling</strong>: Move King 2 squares towards Rook if neither has moved and intervening squares are safe and empty.</li>
-                        <li><strong>En Passant</strong>: Capture an enemy pawn that just moved 2 squares forward adjacent to yours.</li>
-                        <li><strong>Pawn Promotion</strong>: Reach the 8th/1st rank to promote to Queen, Rook, Bishop, or Knight.</li>
-                        <li><strong>Check & Checkmate</strong>: A king under attack is highlighted in Red. If no legal move can escape check, it is Checkmate!</li>
+                        <li><strong>Castling</strong>: Move King 2 squares towards Rook if neither has moved and
+                            intervening squares are safe and empty.</li>
+                        <li><strong>En Passant</strong>: Capture an enemy pawn that just moved 2 squares forward
+                            adjacent to yours.</li>
+                        <li><strong>Pawn Promotion</strong>: Reach the 8th/1st rank to promote to Queen, Rook, Bishop,
+                            or Knight.</li>
+                        <li><strong>Check & Checkmate</strong>: A king under attack is highlighted in Red. If no legal
+                            move can escape check, it is Checkmate!</li>
                     </ul>
                 </div>
             </div>
@@ -486,4 +511,5 @@
     <script src="js/ui.js"></script>
     <script src="js/app.js"></script>
 </body>
+
 </html>
